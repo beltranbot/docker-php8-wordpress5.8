@@ -26,9 +26,14 @@ services:
       MYSQL_PASSWORD: wordpress
 
   wordpress:
+    build:
+      context: .
+      dockerfile: dockerfile
+      args:
+        USER_ID: "${USER_ID}"
+        GROUP_ID: "${GROUP_ID}"
     depends_on:
       - db
-    image: wordpress:php8.0
     volumes:
       - ./:/var/www/html
       - ./php/php.ini:/usr/local/etc/php/conf.d/php.ini
